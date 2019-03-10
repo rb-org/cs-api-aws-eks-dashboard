@@ -20,32 +20,32 @@ resource "kubernetes_role" "dashboard" {
 
   # Allow Dashboard to get, update and delete Dashboard exclusive secrets.
   rule {
-    api_groups    = [""]
-    resources     = ["secrets"]
-    resourceNames = ["kubernetes-dashboard-key-holder", "kubernetes-dashboard-certs"]
-    verbs         = ["get", "update", "delete"]
+    api_groups     = [""]
+    resources      = ["secrets"]
+    resource_names = ["kubernetes-dashboard-key-holder", "kubernetes-dashboard-certs"]
+    verbs          = ["get", "update", "delete"]
   }
 
   # Allow Dashboard to get and update 'kubernetes-dashboard-settings' config map.
   rule {
-    api_groups    = [""]
-    resources     = ["configmaps"]
-    resourceNames = ["kubernetes-dashboard-settings"]
-    verbs         = ["get", "update"]
+    api_groups     = [""]
+    resources      = ["configmaps"]
+    resource_names = ["kubernetes-dashboard-settings"]
+    verbs          = ["get", "update"]
   }
 
   # Allow Dashboard to get metrics from heapster.
   rule {
-    api_groups    = [""]
-    resources     = ["services"]
-    resourceNames = ["heapster"]
-    verbs         = ["proxy"]
+    api_groups     = [""]
+    resources      = ["services"]
+    resource_names = ["heapster"]
+    verbs          = ["proxy"]
   }
 
   rule {
-    api_groups    = [""]
-    resources     = ["services/proxxy"]
-    resourceNames = ["heapster", "http:heapster:", "https:heapster:"]
-    verbs         = ["get"]
+    api_groups     = [""]
+    resources      = ["services/proxxy"]
+    resource_names = ["heapster", "http:heapster:", "https:heapster:"]
+    verbs          = ["get"]
   }
 }

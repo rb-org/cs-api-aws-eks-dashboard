@@ -26,17 +26,18 @@ resource "kubernetes_deployment" "dashboard" {
       }
 
       spec {
-        container {
-          image                = "k8s.gcr.io/kubernetes-dashboard-amd64:v1.10.1"
-          name                 = "kubernetes-dashboard"
-          service_account_name = "${kubernetes_service_account.dashboard.name}"
+        service_account_name = "${kubernetes_service_account.dashboard.name}"
 
-          ports {
+        container {
+          image = "k8s.gcr.io/kubernetes-dashboard-amd64:v1.10.1"
+          name  = "kubernetes-dashboard"
+
+          port {
             container_port = 8443
             protocol       = "TCP"
           }
 
-          args = "--auto-generate-certificates"
+          args = ["--auto-generate-certificates"]
 
           volume_mount {
             name       = "kubernetes-dashboard-certs"
@@ -67,10 +68,10 @@ resource "kubernetes_deployment" "dashboard" {
 
         volume {
           name      = "tmp-volume"
-          empty_dir = "{}"
+          empty_dir = [""]
         }
 
-        tolerations {
+        toleration {
           key    = "node-role.kubernetes.io/master"
           effect = "NoSchedule"
         }
