@@ -1,18 +1,18 @@
 resource "kubernetes_role_binding" "dashboard" {
   metadata {
-    name      = "kubernetes-dashboard-minimal"
-    namespace = "kube-system"
+    name      = "${var.app_name}-minimal"
+    namespace = "${var.namespace}"
   }
 
   role_ref {
     api_group = "rbac.authorization.k8s.io"
     kind      = "Role"
-    name      = "kubernetes-dashboard-minimal"
+    name      = "${var.app_name}-minimal"
   }
 
   subject {
     kind      = "ServiceAccount"
-    name      = "kubernetes-dashboard"
-    namespace = "kube-system"
+    name      = "${var.app_name}"
+    namespace = "${var.namespace}"
   }
 }

@@ -1,7 +1,7 @@
 resource "kubernetes_role" "dashboard" {
   metadata {
-    name      = "kubernetes-dashboard-minimal"
-    namespace = "kube-system"
+    name      = "${var.app_name}-minimal"
+    namespace = "${var.namespace}"
   }
 
   # Allow Dashboard to create 'kubernetes-dashboard-key-holder' secret.
@@ -22,7 +22,7 @@ resource "kubernetes_role" "dashboard" {
   rule {
     api_groups     = [""]
     resources      = ["secrets"]
-    resource_names = ["kubernetes-dashboard-key-holder", "kubernetes-dashboard-certs"]
+    resource_names = ["${var.app_name}-key-holder", "${var.app_name}-certs"]
     verbs          = ["get", "update", "delete"]
   }
 
@@ -30,7 +30,7 @@ resource "kubernetes_role" "dashboard" {
   rule {
     api_groups     = [""]
     resources      = ["configmaps"]
-    resource_names = ["kubernetes-dashboard-settings"]
+    resource_names = ["${var.app_name}-settings"]
     verbs          = ["get", "update"]
   }
 

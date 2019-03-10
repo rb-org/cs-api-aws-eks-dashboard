@@ -1,10 +1,10 @@
 resource "kubernetes_service_account" "dashboard" {
   metadata {
-    name      = "kubernetes-dashboard"
-    namespace = "kube-system"
+    name      = "${var.app_name}"
+    namespace = "${var.namespace}"
 
     labels {
-      k8s-app = "kubernetes-dashboard"
+      k8s-app = "${var.app_name}"
     }
   }
 }

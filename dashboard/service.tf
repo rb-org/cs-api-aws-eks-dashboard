@@ -1,16 +1,16 @@
 resource "kubernetes_service" "dashboard" {
   metadata {
-    name      = "kubernetes-dashboard"
-    namespace = "kube-system"
+    name      = "${var.app_name}"
+    namespace = "${var.namespace}"
 
     labels {
-      k8s-app = "kubernetes-dashboard"
+      k8s-app = "${var.app_name}"
     }
   }
 
   spec {
     selector {
-      k8s-app = "kubernetes-dashboard"
+      k8s-app = "${var.app_name}"
     }
 
     port {
@@ -19,17 +19,3 @@ resource "kubernetes_service" "dashboard" {
     }
   }
 }
-
-# apiVersion: v1
-# metadata:
-#   labels:
-#     k8s-app: kubernetes-dashboard
-#   name: kubernetes-dashboard
-#   namespace: kube-system
-# spec:
-#   ports:
-#     - port: 443
-#       targetPort: 8443
-#   selector:
-#     k8s-app: kubernetes-dashboard
-

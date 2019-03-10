@@ -1,10 +1,10 @@
 resource "kubernetes_secret" "dashboard" {
   metadata {
-    name      = "kubernetes-dashboard-certs"
-    namespace = "kube-system"
+    name      = "${var.app_name}-certs"
+    namespace = "${var.namespace}"
 
     labels {
-      k8s-app = "kubernetes-dashboard"
+      k8s-app = "${var.app_name}"
     }
   }
 
