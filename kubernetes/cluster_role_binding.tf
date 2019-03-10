@@ -18,6 +18,4 @@ resource "kubernetes_cluster_role_binding" "main" {
   depends_on = [
     "kubernetes_service_account.eks_admin",
   ]
-
-  #"null_resource.kube_cfg",
 }
